@@ -1,1 +1,3 @@
-console.log("Welcome to UncLife.");
+import { startGame } from "./game.js";
+
+startGame();
