@@ -1,0 +1,21 @@
+{
+  "name": "unclife",
+  "version": "1.0.0",
+  "description": "> _A console-based life simulation game about navigating peak unc status_",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mughammad-Case/UncLife.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mughammad-Case/UncLife/issues"
+  },
+  "homepage": "https://github.com/Mughammad-Case/UncLife#readme"
+}
