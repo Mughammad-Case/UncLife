@@ -12,4 +12,14 @@ export class Player {
 
     this.alive = true;
   }
-} // Creates a Player class with initial properties to import into the game.
+
+  ageUp() {
+    this.month++;
+
+    if (this.month > 12) {
+      this.month = 1;
+      this.year++;
+      this.age++;
+    }
+  } // Logic to age up the player each month and year, increasing age by 1 each year.
+} // Player class with initial properties to import into the game.
