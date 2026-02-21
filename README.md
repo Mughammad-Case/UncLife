@@ -1,4 +1,4 @@
-# 🗣️ UncLife
+# 🗣️ UncLife (CLI Life Simulation Game)
 
 > _A console-based life simulation game about navigating peak unc status_
 
@@ -32,6 +32,12 @@ Or slowly fade into irrelevance?
 - Console-based interface
 
 ---
+
+## Features
+
+- Player class with stats (age, year, month)
+- Interactive monthly progression
+- Recursive game loop using Node's readline module
 
 ## How to Run
 
