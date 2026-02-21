@@ -30,9 +30,9 @@ function displayPlayerStats(player) {
   console.log("Age:", player.age);
   console.log("Month:", player.month);
   console.log("Year:", player.year);
-  console.log("Money:", player.money);
-  console.log("Health:", player.health);
+  console.log(`Money: $${player.money}`);
+  console.log(`Health: ${player.health}`);
   console.log("Discipline:", player.discipline);
-  console.log("Happiness:", player.happiness);
+  console.log(`Happiness: ${player.happiness}`);
   console.log("Reputation:", player.reputation);
 } // Display Logic to show in console
