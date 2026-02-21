@@ -23,7 +23,11 @@ export class Player {
     }
 
     this.health -= 1;
+    if (this.health <= 0) this.health = 0; // Ensure health doesn't go negative
+
     this.happiness -= 2;
+    if (this.happiness <= 0) this.happiness = 0;
+
     this.money += 100;
     this.discipline += 1;
     this.reputation += 1;
