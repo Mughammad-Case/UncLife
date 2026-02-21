@@ -12,4 +12,4 @@ export class Player {
 
     this.alive = true;
   }
-}
+} // Creates a Player class with initial properties to import into the game.

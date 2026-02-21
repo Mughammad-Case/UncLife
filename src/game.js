@@ -1,14 +1,12 @@
+import { Player } from "./player.js"; // Import the Player class from player.js
 export function startGame() {
   console.clear();
-  // Clears the console for a fresh start
 
-  console.log("=================================");
-  console.log("        WELCOME TO UNCLIFE       ");
-  console.log("=================================");
+  const player = new Player(); // Create a new player instance
 
-  console.log("\nYou wake up...");
-  console.log("It's 2026.");
-  console.log("You're 25 years old, unemployed, and living with your parents.");
+  console.log("WELCOME TO UncFife\n");
 
-  console.log("\nSomething has to change. You can't stay like this forever.");
+  console.log("Player created.");
+  console.log("Age:", player.age);
+  console.log("Money:", player.money);
 }
