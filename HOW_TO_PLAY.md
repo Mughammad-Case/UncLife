@@ -6,6 +6,15 @@
 
 Navigate life **month by month** and build a successful unc life. maybe.
 
+## How To Play
+
+Each time you press Enter, one month passes.
+
+After 12 months:
+
+- The year increases
+- The player ages up
+
 ## Core Stats
 
 These six numbers define your unc existence. Let any of them slip and you'll feel it.
