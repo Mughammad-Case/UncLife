@@ -76,7 +76,10 @@ export function startGame() {
       }
 
       player.ageUp(); // Age up the player after each month/choice
-      gameLoop();
+
+      setTimeout(() => {
+        gameLoop();
+      }, 5000); // To add a delay before the next loop starts
     });
   }
 
