@@ -1,5 +1,6 @@
 import readline from "readline"; // User input handling
 import { Player } from "./player.js"; // Import the Player class from player.js
+
 export function startGame() {
   console.clear();
 
@@ -12,18 +13,57 @@ export function startGame() {
 
   console.log("Welcome to UncLife!");
 
+  function showMenu() {
+    console.log("\nWhat do you do this month?");
+    console.log("1. Work overtime");
+    console.log("2. Exercise");
+    console.log("3. Relax");
+    console.log("4. Do nothing");
+  }
+
+  function handleChoice(choice) {
+    switch (choice) {
+      case "1":
+        player.money += 200;
+        player.health -= 5;
+        player.discipline += 2;
+        break;
+
+      case "2":
+        player.health += 5;
+        player.happiness += 3;
+        break;
+
+      case "3":
+        player.happiness += 5;
+        player.discipline -= 3;
+        break;
+
+      case "4":
+        console.log(
+          "You let the month pass without doing anything. Time flies...",
+        );
+        break;
+
+      default:
+        console.log("Invalid choice. Please select a valid option.");
+        return;
+    }
+  }
+
   function gameLoop() {
     console.clear();
     displayPlayerStats(player);
+    showMenu();
 
-    rl.question('Press "Enter" to advance one month...', () => {
-      console.log("You pressed Enter");
-      player.ageUp();
+    rl.question("Enter your choice: ", (answer) => {
+      handleChoice(answer);
+      player.ageUp(); // Age up the player after each month/choice
       gameLoop();
     });
   }
 
-  gameLoop();
+  gameLoop(); // Starts the game loop
 } // startGame is only responsible for initializing the game
 
 function displayPlayerStats(player) {
