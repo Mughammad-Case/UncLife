@@ -54,6 +54,17 @@ export function startGame() {
   function gameLoop() {
     console.clear();
     displayPlayerStats(player);
+
+    // Check for death conditions
+    if (player.health <= 0) {
+      console.log("\nYou neglected yourself for too long.");
+      console.log(`You died at age ${player.age}.`);
+      console.log("Game Over.");
+
+      rl.close(); //fixes node still waiting for input after game ends
+      return; // Exits the game loop and prevents menu from showing again
+    }
+
     showMenu();
 
     rl.question("Enter your choice: ", (answer) => {
