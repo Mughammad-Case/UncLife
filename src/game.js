@@ -1,6 +1,5 @@
 import readline from "readline"; // User input handling
 import { Player } from "./player.js"; // Import the Player class from player.js
-
 export function startGame() {
   console.clear();
 
@@ -69,6 +68,52 @@ export function startGame() {
 
     rl.question("Enter your choice: ", (answer) => {
       handleChoice(answer);
+
+      const triggerRandomEvents = (player) => {
+        const events = [
+          {
+            text: "You received an unexpected medical bill.",
+            effect: () => {
+              player.money -= 300;
+              player.happiness -= 5;
+            },
+          },
+          {
+            text: "An anonymous person sent you money out of nowhere",
+            effect: () => {
+              player.money += 200;
+              player.happiness += 5;
+            },
+          },
+          {
+            text: "You caught the seasonal flu",
+            effect: () => {
+              player.health -= 10;
+              player.money -= 50;
+            },
+          },
+          {
+            text: "You had a productive breakthrough this month",
+            effect: () => {
+              player.discipline += 5;
+              player.reputation += 7;
+            },
+          },
+        ];
+
+        const randomIndex = Math.floor(Math.random() * events.length);
+        const event = events[randomIndex];
+
+        console.log("\n--- RANDOM EVENT ---");
+        console.log(event.text);
+
+        event.effect();
+      };
+
+      if (Math.random() < 0.3) {
+        triggerRandomEvents(player); // 30% chance of triggering a random event each month
+      }
+
       player.ageUp(); // Age up the player after each month/choice
       gameLoop();
     });
