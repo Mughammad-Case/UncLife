@@ -28,27 +28,27 @@ export function startGame() {
         player.money += 200;
         player.health -= 5;
         player.discipline += 2;
-        break;
+        return true;
 
       case "2":
         player.health += 5;
         player.happiness += 3;
-        break;
+        return true;
 
       case "3":
         player.happiness += 5;
         player.discipline -= 3;
-        break;
+        return true;
 
       case "4":
         console.log(
           "You let the month pass without doing anything. Time flies...",
         );
-        break;
+        return true;
 
       default:
         console.log("Invalid choice. Please select a valid option.");
-        return;
+        return false;
     }
   }
 
@@ -67,9 +67,16 @@ export function startGame() {
     }
 
     showMenu();
+    askforChoice();
+  }
 
+  function askforChoice() {
     rl.question("Enter your choice: ", (answer) => {
-      handleChoice(answer);
+      const isValidChoice = handleChoice(answer);
+
+      if (!isValidChoice) {
+        return askforChoice();
+      }
 
       const eventTriggered = Math.random() < 0.3;
 
