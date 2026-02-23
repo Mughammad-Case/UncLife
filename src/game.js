@@ -71,28 +71,30 @@ export function startGame() {
     rl.question("Enter your choice: ", (answer) => {
       handleChoice(answer);
 
-      if (Math.random() < 0.3) {
-        triggerRandomEvents(player); // 30% chance of triggering a random event each month
+      const eventTriggered = Math.random() < 0.3;
+
+      if (eventTriggered) {
+        triggerRandomEvents(player);
       }
 
-      player.ageUp(); // Age up the player after each month/choice
+      player.ageUp();
 
-      setTimeout(() => {
+      rl.question("\nPress Enter to continue...", () => {
         gameLoop();
-      }, 5000); // To add a delay before the next loop starts
+      });
     });
   }
 
-  gameLoop(); // Starts the game loop
-} // startGame is only responsible for initializing the game
+  gameLoop(); // The main game loop
 
-function displayPlayerStats(player) {
-  console.log("Age:", player.age);
-  console.log("Month:", player.month);
-  console.log("Year:", player.year);
-  console.log(`Money: $${player.money}`);
-  console.log(`Health: ${player.health}`);
-  console.log("Discipline:", player.discipline);
-  console.log(`Happiness: ${player.happiness}`);
-  console.log("Reputation:", player.reputation);
-} // Display Logic to show in console
+  function displayPlayerStats(player) {
+    console.log("Age:", player.age);
+    console.log("Month:", player.month);
+    console.log("Year:", player.year);
+    console.log(`Money: $${player.money}`);
+    console.log(`Health: ${player.health}`);
+    console.log("Discipline:", player.discipline);
+    console.log(`Happiness: ${player.happiness}`);
+    console.log("Reputation:", player.reputation);
+  } // Display Logic to show in console
+}
