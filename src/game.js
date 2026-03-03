@@ -1,21 +1,26 @@
-import readline from "readline"; // User input handling
-import { Player } from "./player.js"; // Import the Player class from player.js
-import { triggerRandomEvents } from "./events.js"; // Import random events logic from events.js
+// The main game logic for UncLife, handles the game loop, user input, and CLI display
+
+import readline from "readline";
+import { Player } from "./player.js";
+import { triggerRandomEvents } from "./events.js";
 
 export function startGame() {
   console.clear();
 
-  const player = new Player(); // Create a new player instance
+  const player = new Player();
 
-  let monthlyMessages = []; // Array to hold messages for the current month
+  // Stores messages displayed during current month and cleared when advancing to next month
+  let monthlyMessages = [];
 
+  // Node.js CLI input interface using readline module
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-  }); // Simple readline interface for user input
+  });
 
   console.log("Welcome to UncLife!");
 
+  // UI actions menu (displays available choices) - to be randomized in future
   function showMenu() {
     console.log("\nWhat do you do this month?");
     console.log("1. Work overtime");
@@ -24,25 +29,27 @@ export function startGame() {
     console.log("4. Do nothing");
   }
 
+  // Handles/Changes player stats based on selected choices
+  // Returns true if valid, false if choice is invalid then prompts to select again
   function handleChoice(choice) {
     switch (choice) {
-      case "1":
+      case "1": // Work overtime
         player.money += 200;
         player.health -= 5;
         player.discipline += 2;
         return true;
 
-      case "2":
+      case "2": // Exercise
         player.health += 5;
         player.happiness += 3;
         return true;
 
-      case "3":
+      case "3": // Relax
         player.happiness += 5;
         player.discipline -= 3;
         return true;
 
-      case "4":
+      case "4": // Do nothing
         monthlyMessages.push(
           "You spent the month doing nothing. Time passes by...",
         );
@@ -54,24 +61,26 @@ export function startGame() {
     }
   }
 
+  // Main game loop, responsible for checking death condition, displaying stats and menu, and input flow of every month
   function gameLoop() {
     console.clear();
     displayPlayerStats(player, monthlyMessages);
 
-    // Check for death conditions
+    // Death condition
     if (player.health <= 0) {
       console.log("\nYou neglected yourself for too long.");
       console.log(`You died at age ${player.age}.`);
       console.log("Game Over.");
 
-      rl.close(); //fixes node still waiting for input after game ends
-      return; // Exits the game loop and prevents menu from showing again
+      rl.close();
+      return;
     }
 
     showMenu();
     askForChoice();
-  }
+  } // Main game loop, check's death condition, display stats, shows menu and handle user input each month
 
+  // Collects player input, validates choice, triggers random events, age up, and continues game loop
   function askForChoice() {
     rl.question("Enter your choice: ", (answer) => {
       const isValidChoice = handleChoice(answer);
@@ -80,27 +89,31 @@ export function startGame() {
         return askForChoice();
       }
 
+      // 30% chance to trigger random life event
       const eventTriggered = Math.random() < 0.3;
 
       if (eventTriggered) {
         triggerRandomEvents(player, monthlyMessages);
       }
 
+      // Adance game time by 1 month
       player.ageUp();
 
-      // RE-RENDER after events and consequences
+      // Display month summary before advancing
       console.clear();
       displayPlayerStats(player, monthlyMessages);
 
       rl.question("\nPress Enter to continue...", () => {
         monthlyMessages = [];
         gameLoop();
-      });
+      }); // Resets monthly message then continues game loop when player press "Enter"
     });
   }
 
-  gameLoop(); // The main game loop
+  // gameloop starts here, ensures all functions are defined before starting the game
+  gameLoop();
 
+  // The UI display function, this is where all stats and feedback are displayed
   function displayPlayerStats(player, monthlyMessages) {
     console.log("==================================================");
     console.log(
@@ -127,7 +140,7 @@ export function startGame() {
       console.log("  Nothing significant happened.");
     } else {
       monthlyMessages.forEach((msg) => {
-        console.log("  - " + msg);
+        console.log(" - " + msg);
       });
     }
 
