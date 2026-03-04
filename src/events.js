@@ -1,41 +1,44 @@
 export function triggerRandomEvents(player, monthlyMessages) {
+  // Possible random events that can occur each month
   const events = [
-    // List of possible random events and effects on Unc's stats
     {
       text: "You received an unexpected medical bill.",
-      effect: () => {
+      effect: (player) => {
         player.money -= 300;
         player.happiness -= 5;
       },
     },
     {
       text: "An anonymous person sent you money out of nowhere",
-      effect: () => {
+      effect: (player) => {
         player.money += 200;
         player.happiness += 5;
       },
     },
     {
       text: "You caught the seasonal flu",
-      effect: () => {
+      effect: (player) => {
         player.health -= 10;
         player.money -= 50;
       },
     },
     {
       text: "You had a productive breakthrough this month",
-      effect: () => {
+      effect: (player) => {
         player.discipline += 5;
         player.reputation += 7;
       },
     },
   ];
 
+  // Selects random event and applies effects to player
   const randomIndex = Math.floor(Math.random() * events.length);
-  const event = events[randomIndex]; // Selects random event from list
+  const event = events[randomIndex];
 
+  // Add event message to monthly messages
   monthlyMessages.push("--- RANDOM EVENT ---");
   monthlyMessages.push(event.text);
 
-  event.effect();
+  // Apply event effects to player
+  event.effect(player);
 }
